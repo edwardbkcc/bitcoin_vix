@@ -5,7 +5,8 @@ import util
 import datetime
 import pandas as pd
 from bkutils import df_to_csv
-
+from bkutils import capture_crash_info
+from matplotlib import pyplot as plt
 deribit = RestClient("KEY", "SECRET")
 cix = CIX()
 
@@ -45,6 +46,7 @@ def get_option_chain(call_options_list,put_options_list,btc_price):
     return option_chain_list
 
 def main():
+    #capture_crash_info.send_crash_email(consts.CRASH_EMAIL_FILE_PATH)
     contracts = deribit.getinstruments()
     btc_price = deribit.index()[consts.BITCOININDEX]
     dict_options_contracts = cix.get_options_contracts(contracts)
@@ -102,9 +104,13 @@ def main():
                                                                     time_till_back_month_settlmenet=back_month_time_to_settlement)
     value_of_cix = cix.calc_CIX(weighted_average_vols)
 
-    bvix_list = [[datetime.datetime.now().date(),value_of_cix]]
-    bvix_df = pd.DataFrame(bvix_list, columns = [consts.DATE,consts.VALUE])
-    bvix_df.set_index(consts.DATE,inplace=True)
-    df_to_csv.df_to_csv(bvix_df,[consts.VALUE],consts.FILENAME)
+    bvix_value_list = [[datetime.datetime.now().date(),value_of_cix]]
+    bvix_value_df = pd.DataFrame(bvix_value_list, columns = [consts.DATE,consts.VALUE])
+    bvix_value_df.set_index(consts.DATE,inplace=True)
+    df_to_csv.df_to_csv(bvix_value_df,[consts.VALUE],consts.FILENAME)
+
+    bvix_historical_values = pd.read_csv(consts.FILENAME)
+    bvix_historical_values.plot()
+    plt.savefig(consts.SAVE_FIG_PATH)
 
 main()
