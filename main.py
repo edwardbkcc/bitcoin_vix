@@ -102,8 +102,7 @@ def main():
                                                                     time_till_back_month_settlmenet=back_month_time_to_settlement)
     value_of_cix = cix.calc_CIX(weighted_average_vols)
 
-    #util.upload_to_s3(value_of_cix)
-    bvix_list = [[datetime.datetime.now(),value_of_cix]]
+    bvix_list = [[datetime.datetime.now().date(),value_of_cix]]
     bvix_df = pd.DataFrame(bvix_list, columns = [consts.TIMESTAMP,consts.VALUE])
     bvix_df.set_index(consts.TIMESTAMP,inplace=True)
     df_to_csv.df_to_csv(bvix_df,[consts.VALUE],consts.FILENAME)
