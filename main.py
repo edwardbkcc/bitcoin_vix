@@ -107,10 +107,12 @@ def main():
     bvix_value_list = [[datetime.datetime.now().date(),value_of_cix]]
     bvix_value_df = pd.DataFrame(bvix_value_list, columns = [consts.DATE,consts.VALUE])
     bvix_value_df.set_index(consts.DATE,inplace=True)
-    df_to_csv.df_to_csv(bvix_value_df,[consts.VALUE],consts.FILENAME)
+    #df_to_csv.df_to_csv(bvix_value_df,[consts.VALUE],consts.FILENAME)
 
+    # plot bvix values
     bvix_historical_values = pd.read_csv(consts.FILENAME)
-    bvix_historical_values.plot()
+    plt.plot(bvix_historical_values[consts.VALUE])
     plt.savefig(consts.SAVE_FIG_PATH)
+
 
 main()
