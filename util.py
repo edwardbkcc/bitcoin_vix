@@ -3,7 +3,7 @@ import consts
 import csv
 from math import sqrt
 
-#returns a list of a parsed date assumes
+# returns a list of a parsed date assumes
 def parse_str_date(date,char_to_split_by):
     parsed_date = date.split(char_to_split_by)
     return parsed_date
