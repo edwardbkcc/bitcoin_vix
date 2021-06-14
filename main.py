@@ -46,7 +46,7 @@ def get_option_chain(call_options_list,put_options_list,btc_price):
     return option_chain_list
 
 def main():
-    #capture_crash_info.send_crash_email(consts.CRASH_EMAIL_FILE_PATH)
+    capture_crash_info.send_crash_email(consts.CRASH_EMAIL_FILE_PATH)
     contracts = deribit.getinstruments()
     btc_price = deribit.index()[consts.BITCOININDEX]
     dict_options_contracts = cix.get_options_contracts(contracts)
@@ -107,7 +107,7 @@ def main():
     bvix_value_list = [[datetime.datetime.now().date(),value_of_cix]]
     bvix_value_df = pd.DataFrame(bvix_value_list, columns = [consts.DATE,consts.VALUE])
     bvix_value_df.set_index(consts.DATE,inplace=True)
-    #df_to_csv.df_to_csv(bvix_value_df,[consts.VALUE],consts.FILENAME)
+    df_to_csv.df_to_csv(bvix_value_df,[consts.VALUE],consts.FILENAME)
 
     # plot bvix values
     bvix_historical_values = pd.read_csv(consts.FILENAME)
