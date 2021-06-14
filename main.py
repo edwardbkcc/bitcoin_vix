@@ -9,7 +9,7 @@ from bkutils import df_to_csv
 deribit = RestClient("KEY", "SECRET")
 cix = CIX()
 
-# edit options chain need to fill in ask and find new midpoint price so i can complete
+#edit options chain need to fill in ask and find new midpoint price so i can complete
 
 #rest of step 1 on file
 def get_option_chain(call_options_list,put_options_list,btc_price):
