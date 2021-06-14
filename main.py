@@ -103,8 +103,8 @@ def main():
     value_of_cix = cix.calc_CIX(weighted_average_vols)
 
     bvix_list = [[datetime.datetime.now().date(),value_of_cix]]
-    bvix_df = pd.DataFrame(bvix_list, columns = [consts.TIMESTAMP,consts.VALUE])
-    bvix_df.set_index(consts.TIMESTAMP,inplace=True)
+    bvix_df = pd.DataFrame(bvix_list, columns = [consts.DATE,consts.VALUE])
+    bvix_df.set_index(consts.DATE,inplace=True)
     df_to_csv.df_to_csv(bvix_df,[consts.VALUE],consts.FILENAME)
 
 main()
